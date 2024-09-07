@@ -19,6 +19,7 @@ void startDrill() {
 void stopDrill() {
     // Implement drill stop logic here
     std::cout << "stopDrill executed" << std::endl;
+    gpioTerminate();
 }
 
 void setGPIOPin(int pin, int status) {
@@ -44,8 +45,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "Usage: " << argv[0] << " function [pin] [action]" << std::endl;
         return 1;
     }
-
-   gpioInitialise();
 
     std::string function = argv[1];
     if (function == "startRelayTicks") {

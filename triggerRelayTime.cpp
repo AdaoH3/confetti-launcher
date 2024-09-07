@@ -5,6 +5,15 @@
 
 const int RELAY_PIN = 27; // Change this to your relay pin
 
+void startDrill() {
+    // Implement drill start logic here
+    gpioSetMode(22, PI_OUTPUT);
+    gpioWrite(22, 0);
+    gpioDelay(6000000);
+    gpioWrite(22, 1);
+    std::cout << "startDrill executed" << std::endl;
+}
+
 int calcMs(int mili)
 {
     float tempMili = mili / 1000.0f; //In Seconds
@@ -51,6 +60,9 @@ void startRelay(int receivedTimeSec) {
         receivedTimeMs -= triggerMs;
         toggleState =!toggleState;
     }
+
+    startDrill();
+
     // Toggle relay 100 more times at 100ms interval
     for (int i = 0; i < 10; i++) {
         gpioWrite(RELAY_PIN, toggleState);
